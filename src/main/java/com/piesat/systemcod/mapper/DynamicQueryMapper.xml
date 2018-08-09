@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.piesat.systemcod.mapper.DynamicQueryMapper">
+
+    <select id="queryMetaList" resultType="Map">
+        select * from ${tableName}
+    </select>
+
+    <select id="queryMetaListByItem" resultType="java.util.Map" parameterType="java.lang.Integer">
+        select * from ${tableName} t
+        where  t.id = #{id}
+    </select>
+    
+    <insert id="insertMataData" >
+        insert into ${tableName}
+        <foreach collection="list" item="item" index="index" separator=";">
+             ${item.column_name} values #{item.columnvalue}
+        </foreach>
+    </insert>
+</mapper>
